@@ -3,11 +3,10 @@ package expression.expressions;
 import expression.constants.OperationsConstants;
 import expression.constants.StringOperationsConstants;
 import expression.functional.SingleExpressionOperation;
-import expression.interfaces.IExpression;
 
 public class ExpressionFunction implements IExpression {
-    private IExpression _expression;
-    private SingleExpressionOperation _function;
+    private final IExpression _expression;
+    private final SingleExpressionOperation _function;
 
     public ExpressionFunction(IExpression expression, String function){
         _expression = expression;

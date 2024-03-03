@@ -3,7 +3,6 @@ package expression.expressions;
 import expression.constants.OperationsConstants;
 import expression.constants.StringOperationsConstants;
 import expression.functional.ExpressionOperation;
-import expression.interfaces.IExpression;
 
 public class ExpressionOperator implements IExpression {
     private final IExpression _left, _right;

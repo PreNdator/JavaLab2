@@ -1,7 +1,5 @@
 package expression.expressions;
 
-import expression.interfaces.IExpression;
-
 public class NumberExpression implements IExpression {
     private final double _number;
 
