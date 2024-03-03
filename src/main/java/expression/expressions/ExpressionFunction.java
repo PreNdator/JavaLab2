@@ -1,5 +1,7 @@
 package expression.expressions;
 
+import expression.constants.OperationsConstants;
+import expression.constants.StringOperationsConstants;
 import expression.functional.SingleExpressionOperation;
 import expression.interfaces.IExpression;
 
@@ -9,6 +11,22 @@ public class ExpressionFunction implements IExpression {
 
     public ExpressionFunction(IExpression expression, String function){
         _expression = expression;
+        _function = getFunction(function);
+    }
+
+    private SingleExpressionOperation getFunction(String function){
+        switch (function) {
+            case StringOperationsConstants.COS:
+                return OperationsConstants.COS;
+            case StringOperationsConstants.SIN:
+                return OperationsConstants.SIN;
+            case StringOperationsConstants.TAN:
+                return OperationsConstants.TAN;
+            case StringOperationsConstants.SQRT:
+                return OperationsConstants.SQRT;
+            default:
+                throw new IllegalArgumentException("Unknown function: " + function);
+        }
     }
 
     @Override
