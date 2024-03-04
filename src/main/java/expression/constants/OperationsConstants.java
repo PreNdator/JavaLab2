@@ -1,17 +1,19 @@
 package expression.constants;
 
-import expression.functional.ExpressionOperation;
-import expression.functional.SingleExpressionOperation;
+import expression.functional.TwoNumOperation;
+import expression.functional.OneNumOperation;
 
 public class OperationsConstants {
-    public static final SingleExpressionOperation SIN = expression -> Math.sin(expression.result());
-    public static final SingleExpressionOperation COS = expression -> Math.cos(expression.result());
-    public static final SingleExpressionOperation TAN = expression -> Math.tan(expression.result());
-    public static final SingleExpressionOperation SQRT = expression -> Math.sqrt(expression.result());
 
-    public static final ExpressionOperation ADD = (expression1, expression2) -> expression1.result() + expression2.result();
-    public static final ExpressionOperation SUB = (expression1, expression2) -> expression1.result() - expression2.result();
-    public static final ExpressionOperation MUL= (expression1, expression2) -> expression1.result() * expression2.result();
-    public static final ExpressionOperation DIV = (expression1, expression2) -> expression1.result() / expression2.result();
-    public static final ExpressionOperation POW = (expression1, expression2) -> Math.pow(expression1.result(), expression2.result());
+
+    public static final OneNumOperation SIN = Math::sin;
+    public static final OneNumOperation COS = Math::cos;
+    public static final OneNumOperation TAN = Math::tan;
+    public static final OneNumOperation SQRT = Math::sqrt;
+
+    public static final TwoNumOperation ADD = Double::sum;
+    public static final TwoNumOperation SUB = (num1, num2) -> num1 - num2;
+    public static final TwoNumOperation MUL= (num1, num2) -> num1 * num2;
+    public static final TwoNumOperation DIV = (num1, num2) -> num1 / num2;
+    public static final TwoNumOperation POW = Math::pow;
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ExpressionParser {
 
-    private final String[] _operators;
+    private final char[] _operators;
     private final String[] _functions;
 
     /**
@@ -17,7 +17,7 @@ public class ExpressionParser {
      * @param operators an array of operator symbols
      * @param functions an array of function names
      */
-    public ExpressionParser(String[] operators, String[] functions) {
+    public ExpressionParser(char[] operators, String[] functions) {
         _operators = Arrays.copyOf(operators, operators.length);
         _functions = Arrays.copyOf(functions, functions.length);
     }
@@ -27,10 +27,8 @@ public class ExpressionParser {
      * taken from StringOperationsConstants class.
      */
     public ExpressionParser(){
-        _operators = new String[]{StringOperationsConstants.ADD, StringOperationsConstants.SUB,
-                StringOperationsConstants.MUL, StringOperationsConstants.DIV, StringOperationsConstants.POW};
-        _functions = new String[]{StringOperationsConstants.COS, StringOperationsConstants.SIN,
-                StringOperationsConstants.TAN, StringOperationsConstants.SQRT};
+        _operators = StringOperationsConstants.getOperators();
+        _functions = StringOperationsConstants.getFunctions();
     }
 
     /**
@@ -54,6 +52,11 @@ public class ExpressionParser {
                     if (isNumHaveDot) {
                         throw new IllegalArgumentException("Invalid number format: " + currentNumber + c);
                     }
+                    else{
+                        if(currentNumber.length() == 0){
+                            currentNumber.append('0');
+                        }
+                    }
                     isNumHaveDot = true;
                 }
                 currentNumber.append(c);
@@ -63,7 +66,7 @@ public class ExpressionParser {
                     isNumHaveDot = false;
                     currentNumber = new StringBuilder();
                 }
-                if (isOperator(String.valueOf(c)) || c == '(' || c == ')') {
+                if (isOperator(c) || c == '(' || c == ')') {
                     tokens.add(String.valueOf(c));
                 } else if (Character.isLetter(c)) {
                     i = parseFunction(expression, i, tokens);
@@ -78,8 +81,6 @@ public class ExpressionParser {
         return tokens.toArray(new String[0]);
     }
 
-
-
     private int parseFunction(String expression, int startIndex, List<String> tokens) {
         int endIndex = findEndOfFunction(expression, startIndex);
         String functionName = expression.substring(startIndex, endIndex);
@@ -91,9 +92,9 @@ public class ExpressionParser {
         return endIndex - 1;
     }
 
-    private boolean isOperator(String token) {
-        for (String operator : _operators) {
-            if (operator.equals(token)) {
+    private boolean isOperator(char token) {
+        for (char operator : _operators) {
+            if (operator == token) {
                 return true;
             }
         }

@@ -30,6 +30,13 @@ public class ExpressionParserTest {
     }
 
     @Test
+    public void testFirstDot() {
+        String expression = ".2";
+        String expected = "0.2";
+        assertEquals(expected, _parser.parseExpression(expression)[0]);
+    }
+
+    @Test
     public void testManyDotsInNumber() {
         String expression = "1.2.3";
         assertThrows(IllegalArgumentException.class, () -> _parser.parseExpression(expression));
